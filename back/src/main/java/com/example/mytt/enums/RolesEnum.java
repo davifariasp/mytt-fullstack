@@ -1,4 +1,4 @@
-package com.example.backend_postly.enums;
+package com.example.mytt.enums;
 
 import lombok.Getter;
 

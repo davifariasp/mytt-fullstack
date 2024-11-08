@@ -1,4 +1,4 @@
-package com.example.backend_postly.dtos;
+package com.example.mytt.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

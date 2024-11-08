@@ -1,4 +1,4 @@
-package com.example.backend_postly.config;
+package com.example.mytt.config;
 
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;

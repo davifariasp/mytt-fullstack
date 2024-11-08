@@ -1,7 +1,7 @@
-package com.example.backend_postly.services;
+package com.example.mytt.services;
 
-import com.example.backend_postly.dtos.CreateUserRequest;
-import com.example.backend_postly.enums.RolesEnum;
+import com.example.mytt.dtos.CreateUserRequest;
+import com.example.mytt.enums.RolesEnum;
 import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;

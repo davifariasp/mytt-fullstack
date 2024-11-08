@@ -1,1 +1,1 @@
-docker compose -p postly up -d
+docker compose -p mytt up -d

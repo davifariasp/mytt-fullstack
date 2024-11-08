@@ -1,10 +1,10 @@
-package com.example.backend_postly.controllers;
+package com.example.mytt.controllers;
 
-import com.example.backend_postly.dtos.CreatePostRequest;
-import com.example.backend_postly.dtos.PostResponse;
-import com.example.backend_postly.models.Post;
-import com.example.backend_postly.repositories.PostRepository;
-import com.example.backend_postly.repositories.UserRepository;
+import com.example.mytt.dtos.CreatePostRequest;
+import com.example.mytt.dtos.PostResponse;
+import com.example.mytt.models.Post;
+import com.example.mytt.repositories.PostRepository;
+import com.example.mytt.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

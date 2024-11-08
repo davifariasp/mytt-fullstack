@@ -1,6 +1,6 @@
-package com.example.backend_postly.repositories;
+package com.example.mytt.repositories;
 
-import com.example.backend_postly.models.User;
+import com.example.mytt.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

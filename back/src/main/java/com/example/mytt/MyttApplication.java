@@ -1,4 +1,4 @@
-package com.example.backend_postly;
+package com.example.mytt;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
@@ -13,10 +13,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		scheme = "bearer"
 )
 @SpringBootApplication
-public class BackendPostlyApplication {
+public class MyttApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendPostlyApplication.class, args);
+		SpringApplication.run(MyttApplication.class, args);
 	}
 
 }

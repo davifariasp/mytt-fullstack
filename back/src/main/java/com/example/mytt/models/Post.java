@@ -1,4 +1,4 @@
-package com.example.backend_postly.models;
+package com.example.mytt.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;

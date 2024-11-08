@@ -1,10 +1,10 @@
-package com.example.backend_postly;
+package com.example.mytt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendPostlyApplicationTests {
+class MyttApplicationTests {
 
 	@Test
 	void contextLoads() {

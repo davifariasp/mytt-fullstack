@@ -1,6 +1,6 @@
-package com.example.backend_postly.config;
-import com.example.backend_postly.enums.RolesEnum;
-import com.example.backend_postly.services.KeycloakService;
+package com.example.mytt.config;
+import com.example.mytt.enums.RolesEnum;
+import com.example.mytt.services.KeycloakService;
 import java.util.*;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;

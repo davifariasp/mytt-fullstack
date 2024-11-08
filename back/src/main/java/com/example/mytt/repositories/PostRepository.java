@@ -1,6 +1,6 @@
-package com.example.backend_postly.repositories;
+package com.example.mytt.repositories;
 
-import com.example.backend_postly.models.Post;
+import com.example.mytt.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostRepository extends JpaRepository<Post, Long> {

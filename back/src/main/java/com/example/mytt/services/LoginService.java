@@ -1,9 +1,9 @@
-package com.example.backend_postly.services;
+package com.example.mytt.services;
 
-import com.example.backend_postly.dtos.LoginRequest;
-import com.example.backend_postly.dtos.LoginResponse;
-import com.example.backend_postly.models.User;
-import com.example.backend_postly.repositories.UserRepository;
+import com.example.mytt.dtos.LoginRequest;
+import com.example.mytt.dtos.LoginResponse;
+import com.example.mytt.models.User;
+import com.example.mytt.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

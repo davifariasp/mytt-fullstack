@@ -1,12 +1,12 @@
-package com.example.backend_postly.controllers;
+package com.example.mytt.controllers;
 
-import com.example.backend_postly.dtos.CreateUserRequest;
-import com.example.backend_postly.dtos.LoginRequest;
-import com.example.backend_postly.enums.RolesEnum;
-import com.example.backend_postly.models.User;
-import com.example.backend_postly.repositories.UserRepository;
-import com.example.backend_postly.services.KeycloakService;
-import com.example.backend_postly.services.LoginService;
+import com.example.mytt.dtos.CreateUserRequest;
+import com.example.mytt.dtos.LoginRequest;
+import com.example.mytt.enums.RolesEnum;
+import com.example.mytt.models.User;
+import com.example.mytt.repositories.UserRepository;
+import com.example.mytt.services.KeycloakService;
+import com.example.mytt.services.LoginService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

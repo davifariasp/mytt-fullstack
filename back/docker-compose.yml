@@ -1,6 +1,6 @@
 services:
   postgres:
-    container_name: pg-postly
+    container_name: pg-mytt
     image: postgres
     restart: always
     environment:
@@ -8,7 +8,7 @@ services:
     ports:
       - 5432:5432
   keycloak:
-    container_name: keycloak-postly
+    container_name: keycloak-mytt
     image: "quay.io/keycloak/keycloak:24.0.5"
     ports:
       - "8000:8080"
