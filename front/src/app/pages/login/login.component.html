@@ -10,18 +10,18 @@
                 <input type="email" class="form-control" id="email" name="email" formControlName="email" >
             </span>
             <span  class="input-form">
-                <label for="password">Password:</label>
+                <label for="password">Senha:</label>
                 <input type="password" class="form-control" id="password" name="password" formControlName="password">
             </span>
 
             <button type="submit" >Login</button>
-            <span class="line"></span>
+        </form>
+        <span class="line"></span>
             <span id="login-google">
                 <img src="/assets/logo-google.png" alt="logo-google">
                 <button (click)="handleLoginWithGoogle()" >Logar com o Google</button>
             </span>
-        </form>
-        <p id="cadastrar"> Não possui conta? <br> <a href="/register">Cadastre-se</a></p>
+        <p id="cadastrar"> Não possui conta? <a href="/register">Cadastre-se</a></p>
     </section>
 </main>
 

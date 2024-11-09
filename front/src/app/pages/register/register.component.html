@@ -1,11 +1,27 @@
-<section    id="registerForm">
-    <form>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
-    </form>
+<main class="container">
+    <section    id="loginRegister">
+        <img src="/assets/mytt.png" alt="Home">
+        <form [formGroup]="myRegister" (ngSubmit)="handleRegister()" >
+            <span class="input-register">
+                <label for="name">Nome:</label>
+                <input type="name" class="register-control" id="name" name="name" formControlName="name" >
+            </span>
+            <span class="input-register">
+                <label for="email">Email:</label>
+                <input type="email" class="register-control" id="email" name="email" formControlName="email" >
+            </span>
+            <span  class="input-register">
+                <label for="password">Senha:</label>
+                <input type="password" class="register-control" id="password" name="password" formControlName="password">
+            </span>
 
-    <button (click)="toLogin()"> Fazer Login </button>
-</section>
+            <button type="submit" >Registrar</button>
+        </form>
+        <span class="line"></span>
+            <span id="login-google">
+                <img src="/assets/logo-google.png" alt="logo-google">
+                <button (click)="handleRegisterWithGoogle()" >Registrar com o Google</button>
+            </span>
+        <p id="cadastrar"> Já possui conta? <a href="/login">Faça o login</a></p>
+    </section>
+</main>
