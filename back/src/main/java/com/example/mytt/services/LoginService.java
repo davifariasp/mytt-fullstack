@@ -45,18 +45,19 @@ public class LoginService {
     }
 
     private Map generateCredentials(LoginRequest request) {
-        MultiValueMap<String, String> keycloakLoginRequest = new LinkedMultiValueMap();
-        keycloakLoginRequest.add("client_id", realmName);
-        keycloakLoginRequest.add("grant_type", "password");
-        keycloakLoginRequest.add("scope", "openid");
-        keycloakLoginRequest.add("username", request.email());
-        keycloakLoginRequest.add("password", request.password());
 
         Optional<User> user = userRepository.findByEmail(request.email());
 
         if (user.isEmpty()) {
             throw new RuntimeException("Usuário não encontrado!");
         }
+
+        MultiValueMap<String, String> keycloakLoginRequest = new LinkedMultiValueMap();
+        keycloakLoginRequest.add("client_id", realmName);
+        keycloakLoginRequest.add("grant_type", "password");
+        keycloakLoginRequest.add("scope", "openid");
+        keycloakLoginRequest.add("username", user.get().getUsername());
+        keycloakLoginRequest.add("password", request.password());
 
         try {
             var keycloakResponse =
