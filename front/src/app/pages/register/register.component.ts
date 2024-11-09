@@ -20,6 +20,7 @@ export class RegisterComponent {
 
   initForm() {
     this.myRegister = this.fb.group({
+      username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['',Validators.required],
     });
@@ -29,7 +30,11 @@ export class RegisterComponent {
     //console.log(this.myForm);
     console.log("clicou para fazer registro");
 
-    this.userService.getHelloWorld().subscribe({
+    // if (this.myRegister.invalid) {
+    //   return console.log('Formulário inválido');
+    // }
+
+    this.userService.registerUser(this.myRegister.value).subscribe({
       next: (data: any) => {
         console.log(data);
         this.route.navigate(['/home']);
@@ -41,6 +46,19 @@ export class RegisterComponent {
         console.log('Complete');
       },
     });
+
+    // this.userService.getHelloWorld().subscribe({
+    //   next: (data: any) => {
+    //     console.log(data);
+    //     this.route.navigate(['/home']);
+    //   },
+    //   error: (error: any) => {
+    //     console.log(error);
+    //   },
+    //   complete: () => {
+    //     console.log('Complete');
+    //   },
+    // });
   }
 
   handleRegisterWithGoogle() {
