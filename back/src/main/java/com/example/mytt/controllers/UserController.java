@@ -30,13 +30,18 @@ public class UserController {
         this.keycloakService = keycloakService;
     }
 
+    @GetMapping("/hello-world")
+    public ResponseEntity helloWorld() {
+        return ResponseEntity.ok("Hello World!");
+    }
+
     @PostMapping("/users")
     public ResponseEntity createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
 
         var keycloakUserId = keycloakService.createUserInKeycloak(createUserRequest, RolesEnum.USER);
 
         var user = new User();
-        user.setName(createUserRequest.name());
+        user.setUsername(createUserRequest.username());
         user.setKeycloakUserId(keycloakUserId);
         user.setPermissions(RolesEnum.USER.name());
         user.setEmail(createUserRequest.email());
@@ -53,7 +58,7 @@ public class UserController {
         var keycloakUserId = keycloakService.createUserInKeycloak(createUserRequest, RolesEnum.ADMIN);
 
         var user = new User();
-        user.setName(createUserRequest.name());
+        user.setUsername(createUserRequest.username());
         user.setKeycloakUserId(keycloakUserId);
         user.setPermissions(RolesEnum.ADMIN.name());
         user.setEmail(createUserRequest.email());

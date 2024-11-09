@@ -23,9 +23,8 @@ public class KeycloakService {
     public UUID createUserInKeycloak(CreateUserRequest req, RolesEnum role) {
         UserRepresentation user = new UserRepresentation();
         user.setEmail(req.email());
-        user.setUsername(req.email());
+        user.setUsername(req.username());
         user.setEnabled(true);
-        user.setAttributes(Map.of("name", List.of(req.name())));
         user.setEmailVerified(true);
 
         try (Response response = keycloakRealm.users().create(user);) {

@@ -32,6 +32,7 @@ public class SecurityConfig {
     public SecurityFilterChain seurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/hello-world").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/posts").permitAll()

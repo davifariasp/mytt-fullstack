@@ -17,7 +17,7 @@ public class User {
     private Long id;
     private UUID keycloakUserId;
     @Column(unique = true)
-    private String name;
+    private String username;
     private String email;
     private String permissions;
 }

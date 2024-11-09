@@ -52,7 +52,7 @@ public class PostController {
                         post.getId(),
                         post.getContent(),
                         post.getCreatedAt(),
-                        post.getUser().getName()
+                        post.getUser().getUsername()
                 ))
                 .toList();
 
