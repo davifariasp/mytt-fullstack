@@ -36,6 +36,7 @@ export class LoginComponent {
     this.userService.getHelloWorld().subscribe({
       next: (data: any) => {
         console.log(data);
+        this.route.navigate(['/home']);
       },
       error: (error: any) => {
         console.log(error);
@@ -44,5 +45,9 @@ export class LoginComponent {
         console.log('Complete');
       },
     });
+  }
+
+  handleLoginWithGoogle() {
+    console.log("clicou para fazer login com google");
   }
 }

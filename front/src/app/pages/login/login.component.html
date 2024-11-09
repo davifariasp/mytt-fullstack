@@ -1,22 +1,27 @@
 
 <!-- usar ngSubmit ao invés de onSubmit permite caputar o evento e evitar que a página recarregue-->
 
-<main>
+<main class="container" >
     <section    id="loginForm">
+        <img src="/assets/mytt.png" alt="Home">
         <form [formGroup]="myForm" (ngSubmit)="handleLogin()" >
-            <div class="form-group">
-                <label for="email">Email</label>
+            <span class="input-form">
+                <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" formControlName="email" >
-            </div>
-            <div  class="form-group">
-                <label for="password">Password</label>
+            </span>
+            <span  class="input-form">
+                <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" formControlName="password">
-            </div>
+            </span>
+
             <button type="submit" >Login</button>
+            <span class="line"></span>
+            <span id="login-google">
+                <img src="/assets/logo-google.png" alt="logo-google">
+                <button (click)="handleLoginWithGoogle()" >Logar com o Google</button>
+            </span>
         </form>
-    
-        <button>Logar com o Google</button>
-        <button (click)="toRegister()">Registrar</button>
+        <p id="cadastrar"> Não possui conta? <br> <a href="/register">Cadastre-se</a></p>
     </section>
 </main>
 
