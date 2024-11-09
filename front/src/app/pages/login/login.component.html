@@ -1,15 +1,18 @@
+
+<!-- usar ngSubmit ao invés de onSubmit permite caputar o evento e evitar que a página recarregue-->
+
 <main>
     <section    id="loginForm">
-        <form>
+        <form [formGroup]="myForm" (ngSubmit)="handleLogin()" >
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" formControlName="email" >
             </div>
             <div  class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" formControlName="password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" >Login</button>
         </form>
     
         <button>Logar com o Google</button>
