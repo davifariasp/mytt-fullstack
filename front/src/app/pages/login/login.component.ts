@@ -30,10 +30,9 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    //console.log(this.myForm);
     console.log("clicou para fazer login");
-
-    this.userService.getHelloWorld().subscribe({
+    
+    this.userService.login(this.myForm.value).subscribe({
       next: (data: any) => {
         console.log(data);
         this.route.navigate(['/home']);
@@ -45,6 +44,19 @@ export class LoginComponent {
         console.log('Complete');
       },
     });
+
+    // this.userService.getHelloWorld().subscribe({
+    //   next: (data: any) => {
+    //     console.log(data);
+    //     this.route.navigate(['/home']);
+    //   },
+    //   error: (error: any) => {
+    //     console.log(error);
+    //   },
+    //   complete: () => {
+    //     console.log('Complete');
+    //   },
+    // });
   }
 
   handleLoginWithGoogle() {
