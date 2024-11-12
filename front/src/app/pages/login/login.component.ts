@@ -1,27 +1,35 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/user-service.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserServiceService } from '../../services/userService/user-service.service';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-
   myForm!: FormGroup;
 
-  constructor(private route: Router, private userService: UserServiceService, private fb: FormBuilder) {
+  constructor(
+    private route: Router,
+    private userService: UserServiceService,
+    private fb: FormBuilder
+  ) {
     this.initForm();
   }
 
   initForm() {
     this.myForm = this.fb.group({
       email: ['', Validators.required],
-      password: ['',Validators.required],
+      password: ['', Validators.required],
     });
   }
 
@@ -30,10 +38,16 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    console.log("clicou para fazer login");
-    
+    console.log('clicou para fazer login');
+
     this.userService.login(this.myForm.value).subscribe({
       next: (data: any) => {
+        //setando token
+        localStorage.setItem("token", "123456");
+
+        console.log("Login efetuado com sucesso!");
+        console.log(localStorage.getItem("token"));
+        
         console.log(data);
         this.route.navigate(['/home']);
       },
@@ -60,6 +74,6 @@ export class LoginComponent {
   }
 
   handleLoginWithGoogle() {
-    console.log("clicou para fazer login com google");
+    console.log('clicou para fazer login com google');
   }
 }

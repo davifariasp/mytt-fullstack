@@ -1,20 +1,28 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/user-service.service';
+import { UserServiceService } from '../../services/userService/user-service.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-
   myRegister!: FormGroup;
 
-  constructor(private route: Router, private userService: UserServiceService, private fb: FormBuilder) {
+  constructor(
+    private route: Router,
+    private userService: UserServiceService,
+    private fb: FormBuilder
+  ) {
     this.initForm();
   }
 
@@ -22,13 +30,13 @@ export class RegisterComponent {
     this.myRegister = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['',Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   handleRegister() {
     //console.log(this.myForm);
-    console.log("clicou para fazer registro");
+    console.log('clicou para fazer registro');
 
     // if (this.myRegister.invalid) {
     //   return console.log('Formulário inválido');
@@ -62,7 +70,6 @@ export class RegisterComponent {
   }
 
   handleRegisterWithGoogle() {
-    console.log("clicou para fazer registro com google");
+    console.log('clicou para fazer registro com google');
   }
-
 }
