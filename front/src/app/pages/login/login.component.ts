@@ -43,12 +43,10 @@ export class LoginComponent {
     this.userService.login(this.myForm.value).subscribe({
       next: (data: any) => {
         //setando token
-        localStorage.setItem("token", "123456");
-
-        console.log("Login efetuado com sucesso!");
-        console.log(localStorage.getItem("token"));
+        localStorage.setItem("acessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
         
-        console.log(data);
+        
         this.route.navigate(['/home']);
       },
       error: (error: any) => {
