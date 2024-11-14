@@ -44,6 +44,38 @@ public class LoginService {
         }
     }
 
+//    public LoginResponse refreshToken(RefreshTokenRequest request) {
+//        MultiValueMap<String, String> keycloakRefreshRequest = new LinkedMultiValueMap();
+//        keycloakRefreshRequest.add("client_id", realmName);
+//        keycloakRefreshRequest.add("grant_type", "refresh_token");
+//        keycloakRefreshRequest.add("refresh_token", request.refreshToken());
+//
+//        try {
+//            var keycloakResponse =
+//                    restClient
+//                            .post()
+//                            .uri("/protocol/openid-connect/token")
+//                            .body(keycloakRefreshRequest)
+//                            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+//                            .retrieve()
+//                            .toEntity(Map.class)
+//                            .getBody();
+//
+//            var accessToken = (String) keycloakResponse.get("access_token");
+//            var refreshToken = (String) keycloakResponse.get("refresh_token");
+//            var expiresIn = (Integer) keycloakResponse.get("expires_in");
+//            var refreshTokenExpiresIn = (Integer) keycloakResponse.get("refresh_expires_in");
+//
+//            return new RefreshTokenResponse(accessToken, refreshToken, expiresIn, refreshTokenExpiresIn);
+//        } catch (HttpClientErrorException.Unauthorized e) {
+//            throw new APIException(401, "Credenciais incorretas!", null);
+//        } catch (HttpClientErrorException.BadRequest e) {
+//            throw new APIException(400, "Refresh Token Inválido!", null);
+//        } catch (Exception e) {
+//            throw new APIException(500, "Erro inesperado ao realizar refresh", e);
+//        }
+//    }
+
     private Map generateCredentials(LoginRequest request) {
 
         Optional<User> user = userRepository.findByEmail(request.email());
