@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/userService/user-service.service';
+import { UserServiceService } from '../../services/user/user-service.service';
 import {
   FormBuilder,
   FormGroup,
@@ -43,10 +43,9 @@ export class LoginComponent {
     this.userService.login(this.myForm.value).subscribe({
       next: (data: any) => {
         //setando token
-        localStorage.setItem("acessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        
-        
+        localStorage.setItem('acessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+
         this.route.navigate(['/home']);
       },
       error: (error: any) => {

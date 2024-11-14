@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/userService/user-service.service';
+import { UserServiceService } from '../../services/user/user-service.service';
 
 @Component({
   selector: 'app-register',
