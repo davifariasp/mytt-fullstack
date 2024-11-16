@@ -7,6 +7,7 @@ import com.example.mytt.repositories.PostRepository;
 import com.example.mytt.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public ResponseEntity listAllPosts() {
-        var posts = postRepository.findAll();
+        var posts = postRepository.findAll(Sort.by(Sort.Order.desc("createdAt")));
 
         List<PostResponse> response = posts.stream()
                 .map(post -> new PostResponse(

@@ -23,3 +23,12 @@
     justify-content: center;
     gap: 20px;
 }
+
+#feed{
+    display: flex;
+    flex-direction: column;
+}
+
+#meu-post{
+    width: 400px;
+}

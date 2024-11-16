@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/user/user-service.service';
+import { UserService } from '../../services/user/user.service';
 import {
   FormBuilder,
   FormGroup,
@@ -20,7 +20,7 @@ export class LoginComponent {
 
   constructor(
     private route: Router,
-    private userService: UserServiceService,
+    private userService: UserService,
     private fb: FormBuilder
   ) {
     this.initForm();

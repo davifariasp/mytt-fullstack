@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../../services/user/user-service.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent {
 
   constructor(
     private route: Router,
-    private userService: UserServiceService,
+    private userService: UserService,
     private fb: FormBuilder
   ) {
     this.initForm();
