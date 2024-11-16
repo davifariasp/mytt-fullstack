@@ -5,10 +5,9 @@
     </nav>
     <article id="feed">
         <section id="meu-post">
-            <h1>Faça um post</h1>
             <form [formGroup]="formPost" (ngSubmit)="handlePost()">
-                <textarea placeholder="O que você está pensando?" formControlName="content"></textarea>
-                <button type="submit">Postar</button>
+                <textarea class="post-textarea" placeholder="O que você está pensando?" formControlName="content"></textarea>
+                <button class="post-button" type="submit">Postar</button>
             </form>
         </section>
         <section id="home-section">

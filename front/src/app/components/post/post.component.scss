@@ -1,7 +1,33 @@
-.post-mytt{
+.post-mytt {
     width: 60vw;
     height: 100px;
     padding: 20px;
     background-color: #212830;
     border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.post-mytt > * {
+    margin: 0; /* Remove margens automáticas */
+    width: auto; /* Ajuste automático para ocupar apenas o conteúdo */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.post-mytt:hover{
+    background-color: #2c313a;
+    cursor: pointer;
+}
+
+.user-mytt-post{
+    font-weight: bold;
+}
+
+.datetime-mytt-post{
+    font-size: 12px;
+    color: #8a8a8a;
 }

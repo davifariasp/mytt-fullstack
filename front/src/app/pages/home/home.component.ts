@@ -35,14 +35,17 @@ export class HomeComponent {
   ) {
     this.initForm();
     
+    this.getPosts();
+  }
+
+  getPosts() {
     this.postService.getPosts().subscribe({
-      next: (data: any) => {
-        
+      next: (data: any) => {    
         this.posts = data.map((post: any) => {
           return {
             content: post.content,
             user: post.user,
-            createdAt: new Date(post.createdAt).toLocaleString(),
+            createdAt: this.formatDateTime(post.createdAt),
           };
         });
 
@@ -55,6 +58,22 @@ export class HomeComponent {
         console.log('Complete');
       },
     });
+  }
+
+  formatDateTime(postDate: string): string {
+    const now = new Date();
+    const postTime = new Date(postDate);
+    const diffInMs = now.getTime() - postTime.getTime(); // Diferença em milissegundos
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60)); // Conversão para minutos
+    const diffInHours = Math.floor(diffInMinutes / 60); // Conversão para horas
+
+    if (diffInMinutes < 60) {
+        return `há ${diffInMinutes} minuto(s)`;
+    } else if (diffInHours < 24) {
+        return `há ${diffInHours} hora(s)`;
+    } else {
+        return postTime.toLocaleDateString('pt-BR'); // Exibe a data no formato "dd/mm/aaaa"
+    }
   }
 
   initForm() {
@@ -73,18 +92,7 @@ export class HomeComponent {
       next: (data: any) => {
         console.log(data);
         this.formPost.reset();
-        this.postService.getPosts().subscribe({
-          next: (data: any) => {
-            this.posts = data;
-            console.log(data);
-          },
-          error: (error: any) => {
-            console.log(error);
-          },
-          complete: () => {
-            console.log('Complete');
-          },
-        });
+        this.getPosts();
       },
       error: (error: any) => {
         console.log(error);
