@@ -39,9 +39,9 @@ export class HomeComponent {
   }
 
   getPosts() {
-    this.postService.getPosts().subscribe({
+    this.postService.getPosts(0).subscribe({
       next: (data: any) => {    
-        this.posts = data.map((post: any) => {
+        this.posts = data.posts.map((post: any) => {
           return {
             content: post.content,
             user: post.user,

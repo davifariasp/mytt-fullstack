@@ -13,13 +13,15 @@ export class PostService {
   token = localStorage.getItem('acessToken');
   
   
-  getPosts() : Observable<any> {
+  getPosts(pagina:number) : Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`, // Substitua por como você obtém seu token
       'Content-Type': 'application/json' // Opcional, mas frequentemente necessário
     });
 
-    return this.client.get(environment.apiUrl + '/posts', {headers});
+    const params = { pagina: pagina};
+
+    return this.client.get(environment.apiUrl + '/posts/user', {headers, params});
   }
 
   createPost(postContent: String) : Observable<any> {
