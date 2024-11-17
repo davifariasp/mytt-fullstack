@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class PostService {
 
     const params = { pagina: pagina};
 
-    return this.client.get(environment.apiUrl + '/posts/user', {headers, params});
+    return this.client.get(environment.apiUrl + '/posts/user', {headers, params}).pipe(delay(2000));;
   }
 
   createPost(postContent: String) : Observable<any> {

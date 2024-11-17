@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { PostComponent } from '../../components/post/post.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -27,6 +27,12 @@ export class HomeComponent {
 
   formPost!: FormGroup;
 
+  pagePosts = 0;
+
+  totalPages!:number;
+
+  isLoading = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -39,9 +45,14 @@ export class HomeComponent {
   }
 
   getPosts() {
-    this.postService.getPosts(0).subscribe({
+    if (this.isLoading) return; // Evita chamadas concorrentes
+  
+    this.isLoading = true;
+  
+    this.postService.getPosts(this.pagePosts).subscribe({
       next: (data: any) => {    
-        this.posts = data.posts.map((post: any) => {
+        // Adiciona os novos posts à lista existente
+        const newPosts = data.posts.map((post: any) => {
           return {
             content: post.content,
             user: post.user,
@@ -49,16 +60,26 @@ export class HomeComponent {
           };
         });
 
-        console.log(data);
+        this.totalPages = data.totalPaginas;
+  
+        // Concatena os novos posts com os existentes
+        this.posts = [...this.posts, ...newPosts];
+  
+        // Incrementa a página para a próxima chamada
+        this.pagePosts++;
+  
+        console.log(this.posts); // Verifica os posts carregados no console
       },
       error: (error: any) => {
-        console.log(error);
+        console.log('Erro ao carregar posts:', error);
       },
       complete: () => {
-        console.log('Complete');
+        this.isLoading = false; // Libera o indicador de carregamento
+        console.log('Posts carregados com sucesso');
       },
     });
   }
+  
 
   formatDateTime(postDate: string): string {
     const now = new Date();
@@ -101,5 +122,19 @@ export class HomeComponent {
         console.log('Complete');
       },
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll() {
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const scrollThreshold = document.body.offsetHeight - 100;
+
+    if (this.pagePosts >= this.totalPages) {
+      return; // Evita chamadas desnecessárias
+    }
+
+    if (scrollPosition >= scrollThreshold) {
+      this.getPosts(); // Carrega mais posts
+    }
   }
 }

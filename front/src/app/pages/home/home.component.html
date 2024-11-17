@@ -16,9 +16,17 @@
                 [usuario]="post.user"
                 [conteudo]="post.content"
                 [data]="post.createdAt"></app-post>
-                } @empty {
-                <p>There are no items.</p>
                 }
+                
+                @if(isLoading) {
+                    <p class="loading-indicator">Carregando posts...</p>
+                }
+                
+                @if(!isLoading && !posts.length) {
+                    <p class="empty-indicator">Nenhum post encontrado</p>
+                }
+
+                
         </section>
     </article>
 </main>
