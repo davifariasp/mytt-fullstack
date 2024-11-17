@@ -5,15 +5,14 @@ import com.example.mytt.dtos.PostResponse;
 import com.example.mytt.models.Post;
 import com.example.mytt.repositories.PostRepository;
 import com.example.mytt.repositories.UserRepository;
+import com.example.mytt.services.PostService;
+import com.example.mytt.services.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,9 +25,15 @@ public class PostController {
 
     final UserRepository userRepository;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository) {
+    final PostService postService;
+
+    final UserService userService;
+
+    public PostController(PostRepository postRepository, UserRepository userRepository, PostService postService, UserService userService) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.postService = postService;
+        this.userService = userService;
     }
 
     @PostMapping("/posts")
@@ -58,5 +63,12 @@ public class PostController {
                 .toList();
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/posts/user")
+    public ResponseEntity listAllPostsByUser(@RequestParam(defaultValue = "0") int pagina, JwtAuthenticationToken token) {
+
+        var user = userService.findUserByJwt(token);
+        return ResponseEntity.ok(postService.findAllPostsByUserId(user.getId(), pagina));
     }
 }

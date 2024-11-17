@@ -9,8 +9,12 @@ import com.example.mytt.services.KeycloakService;
 import com.example.mytt.services.LoginService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +37,21 @@ public class UserController {
     @GetMapping("/hello-world")
     public ResponseEntity helloWorld() {
         return ResponseEntity.ok("Hello World!");
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getLoggedInUser() {
+        // Recupera o usuário autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Jwt jwt = (Jwt) authentication.getPrincipal(); // O JWT completo
+            String username = jwt.getClaimAsString("sub"); // Substitua "sub" pelo claim correto do seu token
+
+            return ResponseEntity.ok("Usuário logado: " + username);
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não autenticado");
     }
 
     @PostMapping("/users")
