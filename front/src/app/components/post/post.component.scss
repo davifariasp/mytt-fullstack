@@ -1,6 +1,6 @@
 .post-mytt {
     width: 60vw;
-    height: 100px;
+    height: 120px;
     padding: 20px;
     background-color: #212830;
     border-radius: 20px;
@@ -28,6 +28,27 @@
 }
 
 .datetime-mytt-post{
-    font-size: 12px;
+    font-size: 14px;
     color: #8a8a8a;
+}
+
+.button-post{
+    background-color: transparent;
+    border: none;
+    color: #8a8a8a;
+    cursor: pointer;
+}
+
+.button-post > mat-icon {
+    font-size: 20px;
+}
+
+.button-post:hover{
+    color: white;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }

@@ -1,5 +1,13 @@
 <article class="post-mytt">
-    <p class="user-mytt-post"> &#64;{{ usuario }}</p>
+    <p class="user-mytt-post"> &#64;{{ usuario }} <span class="datetime-mytt-post"> {{ data }}</span></p>
     <p class="content-mytt-post" > {{ conteudo }}</p>
-    <p class="datetime-mytt-post"> {{ data }}</p>
+    
+
+    <div class="action-buttons">
+        <button class="button-post"> <mat-icon aria-hidden="false" aria-label="favorite icon" fontIcon="favorite" ></mat-icon></button>
+
+        <button class="button-post"> <mat-icon aria-hidden="false" aria-label="favorite icon" fontIcon="notes" ></mat-icon></button>
+
+        <button class="button-post"> <mat-icon aria-hidden="false" aria-label="favorite icon" fontIcon="repeat" ></mat-icon></button>
+    </div>
 </article>

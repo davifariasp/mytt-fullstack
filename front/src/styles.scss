@@ -19,3 +19,5 @@ body {
     align-items: center;     /* Centraliza verticalmente */
     height: 100vh;           /* Preenche a altura total da viewport */
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -3,6 +3,8 @@ import { PostComponent } from '../../components/post/post.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+
 import {
   FormBuilder,
   FormGroup,
@@ -19,7 +21,7 @@ interface PostResponse {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PostComponent, ReactiveFormsModule],
+  imports: [PostComponent, ReactiveFormsModule, MatIconModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
