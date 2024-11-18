@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { PostComponent } from '../../components/post/post.component';
 import { AuthService } from '../../services/auth/auth.service';
+import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -29,12 +30,15 @@ export class HomeComponent {
 
   pagePosts = 0;
 
-  totalPages!:number;
+  totalPages!: number;
+  
+  username:String = "usuário";
 
   isLoading = false;
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private fb: FormBuilder,
     private postService: PostService
@@ -42,6 +46,23 @@ export class HomeComponent {
     this.initForm();
     
     this.getPosts();
+
+    this.getUserInfo();
+  }
+
+  getUserInfo() {
+    this.userService.getUserInfo().subscribe({
+      next: (data: any) => {
+        console.log(data.user.username);
+        this.username = data.username;
+      },
+      error: (error: any) => {
+        console.log('Erro ao carregar informações do usuário:', error);
+      },
+      complete: () => {
+        console.log('Informações do usuário carregadas com sucesso');
+      },
+    });
   }
 
   getPosts() {
