@@ -134,6 +134,12 @@ export class HomeComponent {
       next: (data: any) => {
         console.log(data);
         this.formPost.reset();
+        
+        //resetando pesquisa de posts
+        this.posts = [];
+        this.pagePosts = 0;
+        this.totalPages = 0;
+        
         this.getPosts();
       },
       error: (error: any) => {

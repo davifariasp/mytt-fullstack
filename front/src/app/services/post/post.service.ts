@@ -21,7 +21,7 @@ export class PostService {
 
     const params = { pagina: pagina};
 
-    return this.client.get(environment.apiUrl + '/posts/user', {headers, params}).pipe(delay(2000));;
+    return this.client.get(environment.apiUrl + '/posts/user', {headers, params}).pipe(delay(1000));;
   }
 
   createPost(postContent: String) : Observable<any> {
