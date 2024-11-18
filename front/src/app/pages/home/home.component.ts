@@ -54,7 +54,7 @@ export class HomeComponent {
     this.userService.getUserInfo().subscribe({
       next: (data: any) => {
         console.log(data.user.username);
-        this.username = data.username;
+        this.username = data.user.username;
       },
       error: (error: any) => {
         console.log('Erro ao carregar informações do usuário:', error);
