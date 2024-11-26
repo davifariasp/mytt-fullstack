@@ -19,6 +19,11 @@ Uma das minha intenções era entender melhor como funciona o protocolo OAuth 2.
 
 Para consumir essa API construi uma aplicação simples em Angular 18, sendo essa a minha primeria experiência com o framework.
 
+Algumas features interessantes:
+- Uso de paginação na busca de resultados via JPA
+- Scroll infinito no feed de posts
+- Proteção de rotas, tanto no front quanto no back
+
 
 ## :hammer: Tecnologias
 
