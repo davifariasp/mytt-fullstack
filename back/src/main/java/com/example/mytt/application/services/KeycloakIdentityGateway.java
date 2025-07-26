@@ -1,6 +1,6 @@
 package com.example.mytt.application.services;
 
-import com.example.mytt.application.dtos.CreateUserRequest;
+import com.example.mytt.adapters.services.IdentityProviderPort;
 import com.example.mytt.core.enums.RolesEnum;
 import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.core.Response;
@@ -15,21 +15,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class KeycloakService {
+public class KeycloakIdentityGateway implements IdentityProviderPort {
+
   private final RealmResource keycloakRealm;
 
-  public UUID createUserInKeycloak(CreateUserRequest req, RolesEnum role) {
+  @Override
+  public UUID createUser(String username, String email, String password, RolesEnum role) {
     UserRepresentation user = new UserRepresentation();
-    user.setEmail(req.email());
-    user.setUsername(req.username());
+    user.setEmail(email);
+    user.setUsername(username);
     user.setEnabled(true);
     user.setEmailVerified(true);
 
+    // try catch pois é uma operação que pode falhar
     try (Response response = keycloakRealm.users().create(user); ) {
       String userId = response.getLocation().getPath().replaceAll(".*/([^/]+)$", "$1");
 
       setRole(userId, role);
-      setPassword(userId, req.password());
+      setPassword(userId, password);
 
       return UUID.fromString(userId);
     } catch (Exception e) {

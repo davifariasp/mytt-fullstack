@@ -4,7 +4,6 @@ import com.example.mytt.adapters.usecases.user.CreateUserUseCase;
 import com.example.mytt.application.dtos.CreateUserRequest;
 import com.example.mytt.application.dtos.LoginRequest;
 import com.example.mytt.application.repositories.UserJpaRepository;
-import com.example.mytt.application.services.KeycloakService;
 import com.example.mytt.application.services.LoginService;
 import com.example.mytt.core.domain.entities.User;
 import com.example.mytt.core.enums.RolesEnum;
@@ -29,7 +28,6 @@ public class UserController {
 
   final UserJpaRepository userJpaRepository;
   final LoginService loginService;
-  final KeycloakService keycloakService;
 
   final CreateUserUseCase createUserUseCase;
 
@@ -57,26 +55,28 @@ public class UserController {
   @PostMapping("/users")
   public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
 
-    createUserUseCase.execute(
-        createUserRequest.username(),
-        createUserRequest.email(),
-        createUserRequest.password(),
-        RolesEnum.USER);
+    var user =
+        createUserUseCase.execute(
+            createUserRequest.username(),
+            createUserRequest.email(),
+            createUserRequest.password(),
+            RolesEnum.USER);
 
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok(user);
   }
 
   @PostMapping("/admins")
   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<User> createAdmin(@Valid @RequestBody CreateUserRequest createUserRequest) {
 
-    createUserUseCase.execute(
-        createUserRequest.username(),
-        createUserRequest.email(),
-        createUserRequest.password(),
-        RolesEnum.ADMIN);
+    var user =
+        createUserUseCase.execute(
+            createUserRequest.username(),
+            createUserRequest.email(),
+            createUserRequest.password(),
+            RolesEnum.ADMIN);
 
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok(user);
   }
 
   @PostMapping("/login")

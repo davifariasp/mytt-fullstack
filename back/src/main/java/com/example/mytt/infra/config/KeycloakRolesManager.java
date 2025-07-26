@@ -1,6 +1,6 @@
 package com.example.mytt.infra.config;
 
-import com.example.mytt.application.services.KeycloakService;
+import com.example.mytt.application.services.KeycloakIdentityGateway;
 import com.example.mytt.core.enums.RolesEnum;
 import java.util.*;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class KeycloakRolesManager implements ApplicationListener<ApplicationReadyEvent> {
 
-  private final KeycloakService keycloakService;
+  private final KeycloakIdentityGateway keycloakService;
 
-  public KeycloakRolesManager(KeycloakService keycloakService) {
+  public KeycloakRolesManager(KeycloakIdentityGateway keycloakService) {
     this.keycloakService = keycloakService;
   }
 
