@@ -1,11 +1,9 @@
-package com.example.mytt.adapters.repositories;
+package com.example.mytt.adapters.usecases.post;
 
 import com.example.mytt.core.domain.entities.Post;
 import java.util.List;
 
-public interface PostRepository {
-  Post createPost(String content, Long userId);
-
+public interface GetPostUseCase {
   Post findPostById(Long postId);
 
   List<Post> findAllPostsByUserId(Long userId);

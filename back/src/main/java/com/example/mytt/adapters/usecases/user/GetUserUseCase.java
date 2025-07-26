@@ -1,16 +1,13 @@
-package com.example.mytt.adapters.repositories;
+package com.example.mytt.adapters.usecases.user;
 
-import com.example.mytt.application.entities.UserEntity;
 import com.example.mytt.core.domain.entities.User;
 import java.util.List;
 import java.util.UUID;
 
-public interface UserRepository {
+public interface GetUserUseCase {
   User findUserByEmail(String email);
 
   User findUserByKeycloakUserId(UUID keycloakUserId);
-
-  User createUser(UserEntity userEntity);
 
   List<User> findAllUsers();
 }

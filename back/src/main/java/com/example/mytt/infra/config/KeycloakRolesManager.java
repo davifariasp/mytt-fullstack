@@ -1,6 +1,6 @@
 package com.example.mytt.infra.config;
 
-import com.example.mytt.application.services.KeycloakIdentityGateway;
+import com.example.mytt.application.gateways.KeycloakIdentityGateway;
 import com.example.mytt.core.enums.RolesEnum;
 import java.util.*;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

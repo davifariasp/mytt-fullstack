@@ -1,14 +1,16 @@
 package com.example.mytt.application.controllers;
 
+import com.example.mytt.adapters.usecases.user.AuthenticateUserUseCase;
 import com.example.mytt.adapters.usecases.user.CreateUserUseCase;
+import com.example.mytt.adapters.usecases.user.GetUserUseCase;
 import com.example.mytt.application.dtos.CreateUserRequest;
 import com.example.mytt.application.dtos.LoginRequest;
-import com.example.mytt.application.repositories.UserJpaRepository;
-import com.example.mytt.application.services.LoginService;
+import com.example.mytt.application.dtos.LoginResponse;
 import com.example.mytt.core.domain.entities.User;
 import com.example.mytt.core.enums.RolesEnum;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,9 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class UserController {
 
-  final UserJpaRepository userJpaRepository;
-  final LoginService loginService;
-
   final CreateUserUseCase createUserUseCase;
+  final GetUserUseCase getUserUseCase;
+  final AuthenticateUserUseCase authenticateUserUseCase;
 
   @GetMapping("/hello-world")
   public ResponseEntity helloWorld() {
@@ -80,13 +81,14 @@ public class UserController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity login(@Valid @RequestBody LoginRequest loginRequest) {
-    return ResponseEntity.ok(loginService.login(loginRequest));
+  public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    return ResponseEntity.ok(
+        authenticateUserUseCase.execute(loginRequest.email(), loginRequest.password()));
   }
 
   @GetMapping("/users")
   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-  public ResponseEntity getUsers() {
-    return ResponseEntity.ok(userJpaRepository.findAll());
+  public ResponseEntity<List<User>> getUsers() {
+    return ResponseEntity.ok(getUserUseCase.findAllUsers());
   }
 }
