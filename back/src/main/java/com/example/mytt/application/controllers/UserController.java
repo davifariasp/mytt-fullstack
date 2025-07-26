@@ -1,14 +1,16 @@
 package com.example.mytt.application.controllers;
 
+import com.example.mytt.adapters.usecases.user.CreateUserUseCase;
 import com.example.mytt.application.dtos.CreateUserRequest;
 import com.example.mytt.application.dtos.LoginRequest;
-import com.example.mytt.application.entities.UserEntity;
 import com.example.mytt.application.repositories.UserJpaRepository;
 import com.example.mytt.application.services.KeycloakService;
 import com.example.mytt.application.services.LoginService;
+import com.example.mytt.core.domain.entities.User;
 import com.example.mytt.core.enums.RolesEnum;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,20 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SecurityRequirement(name = "Authorization")
+@AllArgsConstructor
 public class UserController {
 
   final UserJpaRepository userJpaRepository;
   final LoginService loginService;
   final KeycloakService keycloakService;
 
-  public UserController(
-      UserJpaRepository userJpaRepository,
-      LoginService loginService,
-      KeycloakService keycloakService) {
-    this.userJpaRepository = userJpaRepository;
-    this.loginService = loginService;
-    this.keycloakService = keycloakService;
-  }
+  final CreateUserUseCase createUserUseCase;
 
   @GetMapping("/hello-world")
   public ResponseEntity helloWorld() {
@@ -59,34 +55,26 @@ public class UserController {
   }
 
   @PostMapping("/users")
-  public ResponseEntity createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
+  public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
 
-    var keycloakUserId = keycloakService.createUserInKeycloak(createUserRequest, RolesEnum.USER);
-
-    var user = new UserEntity();
-    user.setUsername(createUserRequest.username());
-    user.setKeycloakUserId(keycloakUserId);
-    user.setPermissions(RolesEnum.USER.name());
-    user.setEmail(createUserRequest.email());
-
-    userJpaRepository.save(user);
+    createUserUseCase.execute(
+        createUserRequest.username(),
+        createUserRequest.email(),
+        createUserRequest.password(),
+        RolesEnum.USER);
 
     return ResponseEntity.ok().build();
   }
 
   @PostMapping("/admins")
   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-  public ResponseEntity createAdmin(@Valid @RequestBody CreateUserRequest createUserRequest) {
+  public ResponseEntity<User> createAdmin(@Valid @RequestBody CreateUserRequest createUserRequest) {
 
-    var keycloakUserId = keycloakService.createUserInKeycloak(createUserRequest, RolesEnum.ADMIN);
-
-    var user = new UserEntity();
-    user.setUsername(createUserRequest.username());
-    user.setKeycloakUserId(keycloakUserId);
-    user.setPermissions(RolesEnum.ADMIN.name());
-    user.setEmail(createUserRequest.email());
-
-    userJpaRepository.save(user);
+    createUserUseCase.execute(
+        createUserRequest.username(),
+        createUserRequest.email(),
+        createUserRequest.password(),
+        RolesEnum.ADMIN);
 
     return ResponseEntity.ok().build();
   }
